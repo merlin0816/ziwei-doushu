@@ -59,7 +59,7 @@ export default function InterpretPage() {
   }
 
   return (
-    <main style={{ maxWidth: 1400, margin: '0 auto', padding: '24px 16px' }}>
+    <main style={{ maxWidth: 'min(1900px, 96vw)', margin: '0 auto', padding: '24px 16px' }}>
       <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 16 }}>
         <button
           type="button"
@@ -80,7 +80,7 @@ export default function InterpretPage() {
         </span>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) minmax(0,440px)', gap: 20, alignItems: 'start' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0,1fr) minmax(0,480px)', gap: 20, alignItems: 'start' }}>
         <div>
           <ChartBoard chart={chart} onPalaceSelect={setFocusPalace} />
         </div>
