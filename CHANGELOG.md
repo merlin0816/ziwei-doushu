@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## v0.1.1 — 2026-11-03
+
+### 修复
+
+- **AI 讲解把「思考过程」当成正文显示**：推理型模型（deepseek-v4-flash / glm-5.3-flash 等）的
+  `reasoning_content` 也计入 `max_tokens`，原实现给的 3000 预算在长篇请求里被思考吃光，
+  `content` 为空后代码回退到 `reasoning_content`，于是界面显示出一段英文规划稿。
+  现在：输出预算提到 8000、传 `reasoning_effort: low`，`content` 为空时用 3 倍预算重试一次；
+  仍为空则明确报错，**绝不再把思考过程当正文返回**。
+- 新增可选环境变量 `LLM_MAX_TOKENS`（默认 8000）。
+
+### 文档
+
+- README 增加「界面预览」一节（排盘表单 + 起盘记录 / 原版解读），并补充 docs/images 截图。
+
 ## v0.1.0 — 2026-11-03
 
 基于上游 [ziwei-doushu](https://github.com/Renhuai123/ziwei-doushu) `main`（2026-11-02 快照）。

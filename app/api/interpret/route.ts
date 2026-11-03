@@ -13,6 +13,8 @@ const BASE = process.env.LLM_BASE_URL || 'http://192.168.88.8:7863/v1';
 const KEY = process.env.LLM_API_KEY || '';
 const MODEL = process.env.LLM_MODEL || 'deepseek-v4-flash';
 const TIMEOUT_MS = Number(process.env.LLM_TIMEOUT_MS || 180000);
+/** 单次输出预算（含推理模型的思考 token）；推理型模型给小了会只剩思考、没有正文 */
+const MAX_TOKENS = Number(process.env.LLM_MAX_TOKENS || 8000);
 const MAX_HISTORY = 12;
 
 type Msg = { role: 'user' | 'assistant'; content: string };
@@ -153,7 +155,12 @@ export async function POST(req: Request) {
     ...history.slice(1),
   ];
 
-  try {
+  /**
+   * 调模型。推理型模型（如 deepseek-v4-flash / glm-5.3-flash）会把「思考」也计入 max_tokens，
+   * 预算不足时 content 会为空、只剩下 reasoning_content —— 那段思考过程（往往是英文规划）
+   * 绝不能当正文返回给用户。所以给足预算，并在 content 为空时用更大预算重试一次。
+   */
+  async function callModel(maxTokens: number) {
     const res = await fetch(`${BASE.replace(/\/+$/, '')}/chat/completions`, {
       method: 'POST',
       headers: {
@@ -164,7 +171,8 @@ export async function POST(req: Request) {
         model: MODEL,
         messages,
         temperature: 0.7,
-        max_tokens: 3000,
+        max_tokens: maxTokens,
+        reasoning_effort: 'low',
       }),
       signal: AbortSignal.timeout(TIMEOUT_MS),
     });
@@ -179,15 +187,29 @@ export async function POST(req: Request) {
 
     if (!res.ok) {
       const detail = json?.error?.message || json?.error || raw.slice(0, 300);
-      return NextResponse.json({ error: `模型接口返回 ${res.status}：${detail}` }, { status: 502 });
+      const text = typeof detail === 'string' ? detail : JSON.stringify(detail).slice(0, 300);
+      return { ok: false as const, error: `模型接口返回 ${res.status}：${text}` };
     }
 
     const msg = json?.choices?.[0]?.message || {};
-    const content: string = (msg.content || '').trim() || (msg.reasoning_content || '').trim();
-    if (!content) {
-      return NextResponse.json({ error: '模型返回为空，请重试或换个模型（LLM_MODEL）' }, { status: 502 });
+    return {
+      ok: true as const,
+      content: String(msg.content || '').trim(),
+      model: json?.model as string | undefined,
+    };
+  }
+
+  try {
+    let r = await callModel(MAX_TOKENS);
+    if (r.ok && !r.content) r = await callModel(MAX_TOKENS * 3);
+    if (!r.ok) return NextResponse.json({ error: r.error }, { status: 502 });
+    if (!r.content) {
+      return NextResponse.json(
+        { error: '模型只输出了思考过程、没给出正文（输出预算被思考吃掉了）。请点「重新生成」，或换一个非推理型模型（LLM_MODEL）。' },
+        { status: 502 },
+      );
     }
-    return NextResponse.json({ content, model: json?.model || MODEL });
+    return NextResponse.json({ content: r.content, model: r.model || MODEL });
   } catch (e: any) {
     const msg = e?.name === 'TimeoutError' ? '模型响应超时，请重试或调大 LLM_TIMEOUT_MS' : e?.message || '调用失败';
     return NextResponse.json({ error: msg }, { status: 504 });
