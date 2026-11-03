@@ -206,7 +206,7 @@ export default function AiPanel({ chart, selectedPalace }: { chart: ZiweiChart; 
                 flex: 1,
                 padding: '9px 10px',
                 borderRadius: 12,
-                fontSize: 12,
+                fontSize: 13,
                 cursor: 'pointer',
                 border: `1px solid ${active ? 'rgba(212,168,67,0.7)' : 'rgba(150,150,150,0.35)'}`,
                 background: active ? 'rgba(212,168,67,0.12)' : 'transparent',
@@ -228,7 +228,7 @@ export default function AiPanel({ chart, selectedPalace }: { chart: ZiweiChart; 
             background: 'rgba(212,168,67,0.07)',
             borderRadius: 12,
             padding: '8px 11px',
-            fontSize: 12,
+            fontSize: 13,
             lineHeight: 1.7,
             marginBottom: 10,
           }}
@@ -262,7 +262,7 @@ export default function AiPanel({ chart, selectedPalace }: { chart: ZiweiChart; 
               style={{
                 padding: '6px 11px',
                 borderRadius: 999,
-                fontSize: 12,
+                fontSize: 13,
                 cursor: 'pointer',
                 border: `1px solid ${active ? 'rgba(212,168,67,0.8)' : 'rgba(150,150,150,0.35)'}`,
                 background: active ? 'rgba(212,168,67,0.15)' : 'transparent',
@@ -277,7 +277,7 @@ export default function AiPanel({ chart, selectedPalace }: { chart: ZiweiChart; 
       </div>
 
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
-        <span style={{ fontSize: 11, opacity: 0.55 }}>
+        <span style={{ fontSize: 12, opacity: 0.55 }}>
           {mode === 'dataset'
             ? matched
               ? `已匹配：${matched}`
@@ -288,26 +288,26 @@ export default function AiPanel({ chart, selectedPalace }: { chart: ZiweiChart; 
           type="button"
           onClick={refresh}
           disabled={loading}
-          style={{ fontSize: 11, padding: '3px 9px', borderRadius: 8, border: '1px solid rgba(150,150,150,0.4)', background: 'transparent', color: 'inherit', cursor: loading ? 'not-allowed' : 'pointer', opacity: loading ? 0.5 : 0.8 }}
+          style={{ fontSize: 12, padding: '3px 9px', borderRadius: 8, border: '1px solid rgba(150,150,150,0.4)', background: 'transparent', color: 'inherit', cursor: loading ? 'not-allowed' : 'pointer', opacity: loading ? 0.5 : 0.8 }}
         >
           {mode === 'dataset' ? '重新查表' : '重新生成'}
         </button>
       </div>
 
       {err && (
-        <div style={{ padding: '8px 10px', borderRadius: 10, background: 'rgba(220,80,80,0.12)', fontSize: 12, lineHeight: 1.6, marginBottom: 10 }}>
+        <div style={{ padding: '8px 10px', borderRadius: 10, background: 'rgba(220,80,80,0.12)', fontSize: 13, lineHeight: 1.6, marginBottom: 10 }}>
           ⚠ {err}
         </div>
       )}
 
       {/* 内容区 */}
-      <div ref={scrollRef} style={{ maxHeight: 560, overflowY: 'auto', fontSize: 13, lineHeight: 1.85 }}>
+      <div ref={scrollRef} style={{ maxHeight: 560, overflowY: 'auto', fontSize: 14, lineHeight: 1.85 }}>
         {mode === 'dataset' ? (
           <div style={{ whiteSpace: 'pre-wrap' }}>
             {loading && <div style={{ opacity: 0.6 }}>正在查表（首次查某一年会先下载约 2 MB 数据）…</div>}
             {!loading && datasetBody ? datasetBody : null}
             {!loading && !datasetBody && !err && (
-              <div style={{ opacity: 0.55, fontSize: 12 }}>
+              <div style={{ opacity: 0.55, fontSize: 13 }}>
                 点上面任一主题按钮开始。数据来自作者开源的 674,976 张命盘解读数据集，不调模型、不烧额度。
               </div>
             )}
@@ -315,7 +315,7 @@ export default function AiPanel({ chart, selectedPalace }: { chart: ZiweiChart; 
         ) : (
           <div>
             {thread.length === 0 && !loading && (
-              <div style={{ opacity: 0.55, fontSize: 12 }}>点上面任一主题按钮开始讲解；回答出来后可在下方继续追问。</div>
+              <div style={{ opacity: 0.55, fontSize: 13 }}>点上面任一主题按钮开始讲解；回答出来后可在下方继续追问。</div>
             )}
             {thread.map((m, i) => (
               <div
@@ -328,11 +328,11 @@ export default function AiPanel({ chart, selectedPalace }: { chart: ZiweiChart; 
                   whiteSpace: 'pre-wrap',
                 }}
               >
-                <div style={{ fontSize: 10, opacity: 0.5, marginBottom: 3 }}>{m.role === 'user' ? '你' : 'AI 讲解'}</div>
+                <div style={{ fontSize: 11, opacity: 0.5, marginBottom: 3 }}>{m.role === 'user' ? '你' : 'AI 讲解'}</div>
                 {m.content}
               </div>
             ))}
-            {loading && <div style={{ opacity: 0.6, fontSize: 12 }}>正在解读，通常 5–20 秒…</div>}
+            {loading && <div style={{ opacity: 0.6, fontSize: 13 }}>正在解读，通常 5–20 秒…</div>}
           </div>
         )}
       </div>
@@ -350,20 +350,20 @@ export default function AiPanel({ chart, selectedPalace }: { chart: ZiweiChart; 
               }
             }}
             placeholder={`就「${TOPICS.find((t) => t.key === topic)?.label}」继续追问…`}
-            style={{ flex: 1, padding: '9px 12px', borderRadius: 10, border: '1px solid rgba(150,150,150,0.4)', background: 'transparent', color: 'inherit', fontSize: 13, outline: 'none' }}
+            style={{ flex: 1, padding: '9px 12px', borderRadius: 10, border: '1px solid rgba(150,150,150,0.4)', background: 'transparent', color: 'inherit', fontSize: 14, outline: 'none' }}
           />
           <button
             type="button"
             onClick={followUp}
             disabled={loading}
-            style={{ padding: '9px 16px', borderRadius: 10, border: 'none', background: loading ? 'rgba(150,150,150,0.25)' : 'linear-gradient(135deg,#9a6210,#c88020)', color: '#fff8e8', fontSize: 13, cursor: loading ? 'not-allowed' : 'pointer' }}
+            style={{ padding: '9px 16px', borderRadius: 10, border: 'none', background: loading ? 'rgba(150,150,150,0.25)' : 'linear-gradient(135deg,#9a6210,#c88020)', color: '#fff8e8', fontSize: 14, cursor: loading ? 'not-allowed' : 'pointer' }}
           >
             追问
           </button>
         </div>
       )}
 
-      <p style={{ fontSize: 10, opacity: 0.4, marginTop: 10, lineHeight: 1.6 }}>
+      <p style={{ fontSize: 11, opacity: 0.4, marginTop: 10, lineHeight: 1.6 }}>
         解读与对话会缓存到本机浏览器（每主题保留最近 10 条），下次打开同一张盘点主题即可接着聊。
         <br />
         「原版解读」数据来源：Renhuai123/ziwei-doushu 开源解读数据集 v4.0（CC BY 4.0，作者 王多鱼AI）。

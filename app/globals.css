@@ -163,7 +163,7 @@ body {
   border-radius: var(--r-pill);
   background: var(--tx-0);
   color: var(--bg-0);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   letter-spacing: 0.02em;
   border: none;
@@ -182,7 +182,7 @@ body {
   border-radius: var(--r-pill);
   background: var(--ac);
   color: white;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
   letter-spacing: 0.02em;
   border: none;
@@ -201,7 +201,7 @@ body {
   border-radius: var(--r-pill);
   background: transparent;
   color: var(--tx-1);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 400;
   border: 1px solid var(--bdr-heavy);
   cursor: pointer;
@@ -222,7 +222,7 @@ body {
 .tab-item {
   padding: 7px 16px;
   border-radius: 6px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400;
   color: var(--tx-3);
   cursor: pointer;
@@ -247,7 +247,7 @@ body {
 .sihua-badge {
   display: inline-flex;
   align-items: center;
-  font-size: 10px;
+  font-size: 11px;
   font-family: var(--font-mono);
   padding: 1px 5px;
   border-radius: var(--r-xs);
@@ -263,7 +263,7 @@ body {
   border: 1px solid var(--bdr-med);
   border-radius: var(--r-sm);
   padding: 10px 14px;
-  font-size: 14px;
+  font-size: 15px;
   color: var(--tx-1);
   font-family: var(--font);
   outline: none;
@@ -281,7 +281,7 @@ body {
 
 /* 标签 */
 .label-section {
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--tx-3);

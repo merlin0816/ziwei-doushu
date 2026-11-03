@@ -38,8 +38,8 @@ export default function ChartPage() {
   if (!chart) {
     return (
       <main style={{ maxWidth: 760, margin: '0 auto', padding: '48px 20px' }}>
-        <h1 style={{ fontSize: 26, fontWeight: 700, marginBottom: 8 }}>紫微斗数 · 开源排盘引擎（AI 增强版）</h1>
-        <p style={{ color: '#888', marginBottom: 28, fontSize: 14, lineHeight: 1.7 }}>
+        <h1 style={{ fontSize: 28, fontWeight: 700, marginBottom: 8 }}>紫微斗数 · 开源排盘引擎（AI 增强版）</h1>
+        <p style={{ color: '#888', marginBottom: 28, fontSize: 15, lineHeight: 1.7 }}>
           输入出生年月日时，开源排盘引擎即时生成命盘。
           <br />
           右侧可取「原版解读」（开源数据集原文，无需联网）或「AI 讲解」（本站自建接口）。
@@ -50,7 +50,7 @@ export default function ChartPage() {
         {records.length > 0 && (
           <section style={{ marginTop: 28, border: '1px solid rgba(150,150,150,0.3)', borderRadius: 16, padding: 16 }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
-              <strong style={{ fontSize: 14 }}>起盘记录（{records.length}）</strong>
+              <strong style={{ fontSize: 15 }}>起盘记录（{records.length}）</strong>
               <button
                 type="button"
                 onClick={() => {
@@ -59,7 +59,7 @@ export default function ChartPage() {
                   records.forEach((r) => dropReadings(r.birth));
                   setRecords([]);
                 }}
-                style={{ fontSize: 11, padding: '4px 10px', borderRadius: 8, border: '1px solid rgba(200,80,80,0.5)', background: 'transparent', color: 'inherit', cursor: 'pointer', opacity: 0.8 }}
+                style={{ fontSize: 12, padding: '4px 10px', borderRadius: 8, border: '1px solid rgba(200,80,80,0.5)', background: 'transparent', color: 'inherit', cursor: 'pointer', opacity: 0.8 }}
               >
                 清空全部
               </button>
@@ -78,14 +78,14 @@ export default function ChartPage() {
                   <button
                     type="button"
                     onClick={() => open(r.birth)}
-                    style={{ flex: 1, textAlign: 'left', background: 'transparent', border: 'none', color: 'inherit', cursor: 'pointer', fontSize: 13, padding: 0 }}
+                    style={{ flex: 1, textAlign: 'left', background: 'transparent', border: 'none', color: 'inherit', cursor: 'pointer', fontSize: 14, padding: 0 }}
                     title="点击打开这张盘（解读若已缓存会直接显示）"
                   >
                     <span style={{ fontWeight: 600 }}>{r.name || '未命名'}</span>
                     <span style={{ opacity: 0.65, marginLeft: 8 }}>
                       {recordLabel(r).split(' · ').slice(1).join(' · ')}
                     </span>
-                    <span style={{ opacity: 0.4, marginLeft: 8, fontSize: 11 }}>
+                    <span style={{ opacity: 0.4, marginLeft: 8, fontSize: 12 }}>
                       {new Date(r.updatedAt).toLocaleString()}
                     </span>
                   </button>
@@ -97,14 +97,14 @@ export default function ChartPage() {
                       dropReadings(r.birth);
                       setRecords(listRecords());
                     }}
-                    style={{ fontSize: 11, padding: '4px 10px', borderRadius: 8, border: '1px solid rgba(200,80,80,0.45)', background: 'transparent', color: 'inherit', cursor: 'pointer', opacity: 0.75 }}
+                    style={{ fontSize: 12, padding: '4px 10px', borderRadius: 8, border: '1px solid rgba(200,80,80,0.45)', background: 'transparent', color: 'inherit', cursor: 'pointer', opacity: 0.75 }}
                   >
                     删除
                   </button>
                 </li>
               ))}
             </ul>
-            <p style={{ fontSize: 10, opacity: 0.45, margin: '8px 0 0' }}>
+            <p style={{ fontSize: 11, opacity: 0.45, margin: '8px 0 0' }}>
               记录只存在这台设备的浏览器里（localStorage），不上传服务器；换浏览器或清缓存会丢。
             </p>
           </section>
@@ -136,11 +136,11 @@ export default function ChartPage() {
             setChart(null);
             setSelectedPalace(null);
           }}
-          style={{ padding: '6px 12px', cursor: 'pointer', border: '1px solid rgba(200,80,80,0.45)', borderRadius: 8, background: 'transparent', color: 'inherit', fontSize: 12, opacity: 0.8 }}
+          style={{ padding: '6px 12px', cursor: 'pointer', border: '1px solid rgba(200,80,80,0.45)', borderRadius: 8, background: 'transparent', color: 'inherit', fontSize: 13, opacity: 0.8 }}
         >
           删除本记录
         </button>
-        <span style={{ fontSize: 12, opacity: 0.55 }}>
+        <span style={{ fontSize: 13, opacity: 0.55 }}>
           {chart.birthInfo.name || '未命名'} · {chart.birthInfo.year}-{String(chart.birthInfo.month).padStart(2, '0')}-{String(chart.birthInfo.day).padStart(2, '0')} · {chart.wuxingJuName}
         </span>
       </div>
