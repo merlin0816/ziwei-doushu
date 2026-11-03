@@ -1,0 +1,37 @@
+NOTICE
+======
+
+本仓库是 Renhuai123/ziwei-doushu 的下游增强版。
+
+上游项目
+--------
+- 仓库：https://github.com/Renhuai123/ziwei-doushu
+- 许可：MIT（代码）
+- 作者：王多鱼AI
+
+本仓库的改动
+------------
+新增（均为 MIT，与上游同协议）：
+- app/api/interpret/route.ts    AI 讲解接口（OpenAI 兼容）
+- app/api/dataset/route.ts      解读数据集本地查表接口
+- app/interpret/page.tsx        独立 AI 对话页
+- components/AiPanel.tsx        置于命盘页右侧的解读面板
+- lib/history.ts                起盘记录与解读缓存（localStorage）
+- Dockerfile / docker-compose.yml / .env.example / docs/  部署相关
+
+修改：
+- app/chart/page.tsx            右侧占位面板（InsightPanel）替换为 AiPanel；表单下方增加起盘记录
+
+未包含
+------
+- 上游的断语库、AI prompt、商业站前端、账号/会员/支付（上游同样不开源）
+- 解读数据集本体（v4.0，CC BY 4.0）：运行时从上游 Release 按需下载，本仓库不重分发
+- 倪海厦《天纪》原话语料（CC BY-NC-SA 4.0，不可商用）
+
+数据署名（CC BY 4.0 要求）
+--------------------------
+本项目使用了「紫微斗数开源解读数据集 v4.0」（674,976 张命盘 × 13 维）
+来源：https://github.com/Renhuai123/ziwei-doushu
+作者：王多鱼AI
+
+古籍原文属公有领域。倪海厦原话的著作权归原权利人，本项目不包含该语料。

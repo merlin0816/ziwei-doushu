@@ -7,3 +7,9 @@ dist/
 *.tsbuildinfo
 .DS_Store
 node_modules
+
+# ±¾Õ¾Ôö²¹
+.env
+.env.local
+data/
+

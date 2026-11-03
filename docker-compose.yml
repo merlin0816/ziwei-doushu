@@ -1,0 +1,36 @@
+# 紫微斗数排盘（本站增补版）—— 通用 docker compose
+# 用法：cp .env.example .env && 填入 LLM_API_KEY && mkdir -p data && docker compose up -d --build
+# 访问：http://<主机IP>:8899/chart
+
+services:
+  ziwei-doushu:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ziwei-doushu:latest
+    container_name: ziwei-doushu
+    restart: unless-stopped
+    ports:
+      - "8899:3000"                       # 改了这里的话，容器内仍然是 3000
+    environment:
+      TZ: Asia/Shanghai
+      NODE_ENV: production
+      NEXT_TELEMETRY_DISABLED: "1"
+      # 只有 key 必须外部化；base_url / model / timeout 在代码里有默认值
+      LLM_API_KEY: ${LLM_API_KEY:-}
+      LLM_BASE_URL: ${LLM_BASE_URL:-}
+      LLM_MODEL: ${LLM_MODEL:-}
+      ZIWEI_DATA_DIR: /data/cache
+    volumes:
+      # 解读数据集缓存（每年约 2 MB，首次查某年时自动下载）
+      - ./data:/data
+    mem_limit: 1g
+    memswap_limit: 1536m
+    cpus: 1
+    security_opt:
+      - no-new-privileges:true
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"

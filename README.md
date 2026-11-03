@@ -1,3 +1,6 @@
+> **本站增补版**（相对上游 Demo）：新增「原版解读 · 本地数据集查表」「AI 讲解 · 多轮追问」「起盘记录」三项能力，并自带 Docker 部署。
+> 详见 [docs/本站增补说明.md](docs/本站增补说明.md) 与 [docs/部署说明.md](docs/部署说明.md)；
+> 改动清单见 [CHANGELOG.md](CHANGELOG.md)，数据署名与许可见 [NOTICE](NOTICE)。以下为上游原版说明。
 <div align="center">
 
 # 紫微斗数 · 开源排盘引擎
