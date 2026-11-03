@@ -38,7 +38,7 @@ export default function ChartPage() {
   if (!chart) {
     return (
       <main style={{ maxWidth: 760, margin: '0 auto', padding: '48px 20px' }}>
-        <h1 style={{ fontSize: 28, fontWeight: 700, marginBottom: 8 }}>紫微斗数排盘</h1>
+        <h1 style={{ fontSize: 26, fontWeight: 700, marginBottom: 8 }}>紫微斗数 · 开源排盘引擎（AI 增强版）</h1>
         <p style={{ color: '#888', marginBottom: 28, fontSize: 14, lineHeight: 1.7 }}>
           输入出生年月日时，开源排盘引擎即时生成命盘。
           <br />
