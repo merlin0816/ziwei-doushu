@@ -21,6 +21,8 @@ services:
       LLM_BASE_URL: ${LLM_BASE_URL:-}
       LLM_MODEL: ${LLM_MODEL:-}
       ZIWEI_DATA_DIR: /data/cache
+      # 访问口令：留空=不设防；对外暴露前务必设置
+      ACCESS_PASSWORD: ${ACCESS_PASSWORD:-}
     volumes:
       # 解读数据集缓存（每年约 2 MB，首次查某年时自动下载）
       - ./data:/data

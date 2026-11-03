@@ -1,5 +1,22 @@
 # CHANGELOG
 
+## v0.1.3 — 2026-11-03
+
+### 新增
+
+- **访问口令（可选）**：设置环境变量 `ACCESS_PASSWORD` 后，全站要求先输入口令（记住 30 天），未通过一律跳 `/login`。
+  - 不设置则完全放行，内网自用无感
+  - 实现：`middleware.ts` 拦截 + `POST /api/login` 校验；cookie 里存放口令的 **SHA-256 派生值**，不放明文
+  - 静态资源（`/_next`、favicon、robots、sitemap）不拦，避免页面掉样式
+  - 目的：对外暴露（Cloudflare 隧道 / Tailscale / VPS 反代）时防止别人拿链接白用模型额度
+- `docs/部署说明.md` 新增「6.5 访问口令」一节；`.env.example`、`docker-compose.yml` 同步该变量
+
+### 界面 / 文档
+
+- 三张 README 截图更新为当前字号版本，保持原始分辨率（仅裁掉四周黑边，未缩放、未降质）
+- 大屏适配：主容器 `maxWidth` 由固定 1400px 改为 `min(1900px, 96vw)`，右栏 440→480px
+
+
 ## v0.1.2 — 2026-11-03
 
 ### 界面
